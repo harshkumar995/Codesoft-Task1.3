@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f4f8;
+}
+
+.calculator {
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 320px;
+}
+
+.display {
+  width: 100%;
+  height: 80px;
+  border: none;
+  text-align: right;
+  padding: 20px 0px;
+  font-size: 2rem;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: #e6e6e6;
+}
+
+button {
+  height: 70px;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #d7e3fc;
+}
+
+button:active {
+  background-color: #a8c5fc;
+}
+
+button.equals {
+  background-color: #4caf50;
+  color: white;
+  grid-column: span 2;
+}
+
+button.equals:hover {
+  background-color: #45a049;
+}
+
+button.zero {
+  grid-column: span 2;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" class="display" disabled>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendValue('/')">/</button>
+      <button style="background-color: #e6e6e6;"></button>
+      <button onclick="backspace()">←</button>
+      <button onclick="appendValue('7')">7</button>
+      <button onclick="appendValue('8')">8</button>
+      <button onclick="appendValue('9')">9</button>
+      <button onclick="appendValue('-')">-</button>
+      <button onclick="appendValue('4')">4</button>
+      <button onclick="appendValue('5')">5</button>
+      <button onclick="appendValue('6')">6</button>
+      <button onclick="appendValue('+')">+</button>
+      <button onclick="appendValue('1')">1</button>
+      <button onclick="appendValue('2')">2</button>
+      <button onclick="appendValue('3')">3</button>
+      <button onclick="appendValue('*')">x</button>
+      <button onclick="calculate()" class="equals">=</button>
+      <button onclick="appendValue('0')" class="zero">0</button>
+      <button onclick="appendValue('.')">.</button>
+    </div>
+  </div>
+  <script>
+        function clearDisplay() {
+    document.getElementById('display').value = '';
+    }
+
+    function appendValue(value) {
+    document.getElementById('display').value += value;
+    }
+
+    function backspace() {
+    let display = document.getElementById('display').value;
+    document.getElementById('display').value = display.slice(0, -1);
+    }
+
+    function calculate() {
+    let display = document.getElementById('display').value;
+    try {
+        document.getElementById('display').value = eval(display);
+    } catch {
+        document.getElementById('display').value = 'Error';
+    }
+    }
+  </script>
+</body>
+</html>
